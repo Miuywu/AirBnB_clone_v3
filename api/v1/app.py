@@ -20,6 +20,7 @@ def session_off(self):
 
 @app.errorhandler(404)
 def not_found(error):
+    """returns dict"""
     return ({"error": "Not Found"})
 
 
