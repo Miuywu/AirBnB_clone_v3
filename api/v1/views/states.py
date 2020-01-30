@@ -19,19 +19,21 @@ def list_states():
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_state(state_id):
     """returns state with given id"""
-    st_obj = storage.get("State", state_id)
-    if not st_obj:
+    the_chosen_one = storage.get("State", state_id)
+    if not the_chosen_one:
         abort(404)
-    return jsonify(st_obj.to_dict())
+    return jsonify(the_chosen_one.to_dict())
 
 
 @app_views.route('/states/<state_id>', methods=['DELETE'],
                  strict_slashes=False)
 def del_state(state_id):
     """deletes state of given id"""
-    st_obj = storage.get("State", state_id)
-    if not st_obj:
+    the_forsaken_one = storage.get("State", state_id)
+    if not the_forsaken_one:
         abort(404)
+    the_forsaken_one.delete()
+    storage.save()
     return {}, 200
 
 
@@ -43,22 +45,22 @@ def post_state():
         abort(400, "Not a JSON")
     if "name" not in derulo:
         abort(400, "Missing name")
-    storage.new(derulo)
+    Jason = State(**derulo)
+    storage.new(Jason)
     storage.save()
-    return make_response(derulo.to_dict(), 201)
+    return make_response(Jason.to_dict(), 201)
 
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
     """update a state with given id"""
-    st_obj = storage.get("State", state_id)
-    if not st_obj:
-        abort(404)
     derulo = request.get_json()
     if not derulo:
         abort(400, "Not a JSON")
-    for k, v in req.items():
-        if k is not "id" or "created_at" or "updated_at":
-            setattr(st_obj, k, v)
+    new_me = storage.get("State", state_id)
+    if not new_me:
+        abort(404)
+    for k, v in derulo.items():
+            setattr(new_me, k, v)
     storage.save()
-    return make_response(st_obj.to_dict(), 200)
+    return make_response(new_me.to_dict(), 200)
