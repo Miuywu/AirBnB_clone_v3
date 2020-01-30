@@ -21,7 +21,7 @@ def session_off(self):
 @app.errorhandler(404)
 def not_found(error):
     """returns dict"""
-    return ({"error": "Not Found"})
+    return ({"error": "Not found"})
 
 
 if __name__ == "__main__":
