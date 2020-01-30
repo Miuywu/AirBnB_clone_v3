@@ -1,0 +1,9 @@
+#!/bin/bash
+echo task 4
+curl -X GET http://0.0.0.0:5000/api/v1/status
+echo task 5
+curl -X GET http://0.0.0.0:5000/api/v1/stats
+echo task 6
+curl -X GET http://0.0.0.0:5000/api/v1/nop
+echo task 7
+curl -X GET http://0.0.0.0:5000/api/v1/states/
