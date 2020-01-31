@@ -61,6 +61,7 @@ def update_state(state_id):
     if not new_me:
         abort(404)
     for k, v in derulo.items():
+        if k != 'id' and k != 'created_at' and k != 'updated_at':
             setattr(new_me, k, v)
     storage.save()
     return make_response(new_me.to_dict(), 200)
