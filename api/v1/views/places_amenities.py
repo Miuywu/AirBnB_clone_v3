@@ -12,15 +12,10 @@ from os import getenv
                  strict_slashes=False)
 def list_place_amenities(place_id):
     """returns list of amenity objs"""
-
-    amenity_list = []
     place_link = storage.get("Place", place_id)
     if not place_link:
         abort(404)
-    for obj in storage.all("Amenity").values():
-        if obj.place_id == place_id:
-            amenity_list.append(obj.to_dict())
-    return jsonify(amenity_list)
+    return jsonify(place_link.amenity_ids)
 
 
 @app_views.route('places/<place_id>/amenities/<amenity_id>',
