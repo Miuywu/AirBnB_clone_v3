@@ -7,7 +7,7 @@ from models.place import Place
 from models.review import Review
 
 
-@app_views.route('/places/<place_id>/review', methods=['GET'],
+@app_views.route('/places/<place_id>/reviews', methods=['GET'],
                  strict_slashes=False)
 def list_reviews(place_id):
     """returns list or reviews objs"""
