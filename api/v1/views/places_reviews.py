@@ -34,7 +34,7 @@ def get_review(review_id):
 
 @app_views.route('/reviews/<review_id>', methods=['DELETE'],
                  strict_slashes=False)
-def del_place(review_id):
+def del_review(review_id):
     """deletes state of given id"""
     the_forsaken_one = storage.get("Review", review_id)
     if not the_forsaken_one:
