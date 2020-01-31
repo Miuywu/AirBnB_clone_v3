@@ -26,10 +26,10 @@ def list_reviews(place_id):
 @app_views.route('/reviews/<review_id>', methods=['GET'], strict_slashes=False)
 def get_review(review_id):
     """returns review with given id"""
-    review = storage.get("Review", review_id)
-    if not place:
+    review_link = storage.get("Review", review_id)
+    if not review_link:
         abort(404)
-    return jsonify(place.to_dict())
+    return jsonify(review_link.to_dict())
 
 
 @app_views.route('/reviews/<review_id>', methods=['DELETE'],
