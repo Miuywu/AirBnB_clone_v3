@@ -12,6 +12,8 @@ from os import getenv
                  strict_slashes=False)
 def list_place_amenities(place_id):
     """returns list of amenity objs"""
+    if models.storage_t == 'db':
+        return None
     place_link = storage.get("Place", place_id)
     if not place_link:
         abort(404)
@@ -22,6 +24,8 @@ def list_place_amenities(place_id):
                  methods=['DELETE'], strict_slashes=False)
 def del_amenity_place(place_id, amenity_id):
     """deletes state of given id"""
+    if models.storage_t == 'db':
+        return None
     place_link = storage.get("Place", place_id)
     if not place_link:
         abort(404)
@@ -39,6 +43,8 @@ def del_amenity_place(place_id, amenity_id):
                  strict_slashes=False)
 def post_amenity_to_place(place_id, amenity_id):
     """creates a city"""
+    if models.storage_t == 'db':
+        return None
     place_link = storage.get("Place", place_id)
     if not place_link:
         abort(404)
