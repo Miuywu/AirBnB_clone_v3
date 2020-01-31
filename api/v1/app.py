@@ -5,14 +5,14 @@ from models import storage
 from api.v1.views import app_views
 from flask import Flask, Blueprint, make_response, jsonify
 from os import getenv
-# from flask_cors import CORS
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
 hst = getenv("HBNB_API_HOST") or '0.0.0.0'
 prt = getenv("HBNB_API_PORT") or '5000'
-# app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-# cors = CORS(app, resources={r'/*': {'origins': '0.0.0.0'}})
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+cors = CORS(app, resources={r'/*': {'origins': '0.0.0.0'}})
 
 
 @app.teardown_appcontext
