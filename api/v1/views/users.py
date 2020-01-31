@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Amenities functions"""
+"""Users functions"""
 from api.v1.views import app_views
 from flask import Flask, jsonify, abort, make_response, request
 from models import storage
@@ -44,8 +44,10 @@ def post_users():
     derulo = request.get_json()
     if not derulo:
         abort(400, "Not a JSON")
-    if "name" not in derulo:
-        abort(400, "Missing name")
+    if "email" not in derulo:
+        abort(400, "Missing email")
+    if "password" not in derulo:
+        abort(400, "Missing password")
     Jason = State(**derulo)
     storage.new(Jason)
     storage.save()
@@ -63,6 +65,7 @@ def update_user(user_id):
     if not new_me:
         abort(404)
     for k, v in derulo.items():
+        if k != "id" and k != "email":
             setattr(new_me, k, v)
     storage.save()
     return make_response(new_me.to_dict(), 200)
