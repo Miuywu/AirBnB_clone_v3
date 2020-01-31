@@ -30,7 +30,7 @@ def del_amenity_place(place_id, amenity_id):
         abort(404)
     if amenity_id not in place_link.amenity_ids:
         abort(404)
-    amenity_link.delete()
+    place_link.amenity_ids.remove(amenity_id)
     storage.save()
     return {}, 200
 
