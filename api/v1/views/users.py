@@ -48,7 +48,7 @@ def post_users():
         abort(400, "Missing email")
     if "password" not in derulo:
         abort(400, "Missing password")
-    Jason = State(**derulo)
+    Jason = User(**derulo)
     storage.new(Jason)
     storage.save()
     return make_response(Jason.to_dict(), 201)
