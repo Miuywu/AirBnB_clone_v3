@@ -4,7 +4,7 @@ from api.v1.views import app_views
 from flask import Flask, jsonify, abort, make_response, request
 from models import storage
 from models.place import Place
-from models.review import Review
+from models.amenity import Amenity
 from os import getenv
 
 
