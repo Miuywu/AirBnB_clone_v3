@@ -46,7 +46,7 @@ def post_amenities():
         abort(400, "Not a JSON")
     if "name" not in derulo:
         abort(400, "Missing name")
-    Jason = State(**derulo)
+    Jason = Amenity(**derulo)
     storage.new(Jason)
     storage.save()
     return make_response(Jason.to_dict(), 201)
