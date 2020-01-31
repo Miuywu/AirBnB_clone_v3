@@ -16,7 +16,8 @@ def list_amenities():
     return jsonify(ay_list)
 
 
-@app_views.route('/amenities/<amenity_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/amenities/<amenity_id>', methods=['GET'],
+                 strict_slashes=False)
 def get_amenity(amenity_id):
     """returns amenity with given id"""
     the_chosen_one = storage.get("Amenity", amenity_id)
@@ -51,7 +52,8 @@ def post_amenities():
     return make_response(Jason.to_dict(), 201)
 
 
-@app_views.route('/amenities/<amenity_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/amenities/<amenity_id>', methods=['PUT'],
+                 strict_slashes=False)
 def update_amenity(amenity_id):
     """update a amenity with given id"""
     derulo = request.get_json()
