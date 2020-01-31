@@ -12,13 +12,12 @@ from models.city import City
 def list_cities(state_id):
     """returns list of city objs"""
     city_list = []
-
+    state = storage.get("State", state_id)
+    if not state:
+        abort(404)
     for obj in storage.all("City").values():
         if obj.state_id == state_id:
             city_list.append(obj.to_dict())
-
-    if city_list == []:
-        abort(404)
     return jsonify(city_list)
 
 
