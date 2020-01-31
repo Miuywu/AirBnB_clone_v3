@@ -11,7 +11,7 @@ from models.place import Place
 @app_views.route('/cities/<city_id>/places', methods=['GET'],
                  strict_slashes=False)
 def list_plays(city_id):
-    """returns list of city objs"""
+    """returns place of city objs"""
     place_list = []
     city = storage.get("City", city_id)
     if not city:
@@ -24,11 +24,11 @@ def list_plays(city_id):
 
 @app_views.route('/places/<place_id>', methods=['GET'], strict_slashes=False)
 def get_place(place_id):
-    """returns city with given id"""
+    """returns place with given id"""
     place = storage.get("Place", place_id)
     if not place:
         abort(404)
-    return jsonify(city.to_dict())
+    return jsonify(place.to_dict())
 
 
 @app_views.route('/places/<place_id>', methods=['DELETE'],
@@ -77,6 +77,6 @@ def update_place(place_id):
     if not place_link:
         abort(404)
     for k, v in derulo.items():
-            setattr(new_me, k, v)
+            setattr(place_link, k, v)
     storage.save()
-    return make_response(new_me.to_dict(), 200)
+    return make_response(place_link.to_dict(), 200)
