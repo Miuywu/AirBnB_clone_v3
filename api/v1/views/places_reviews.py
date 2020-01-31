@@ -3,8 +3,6 @@
 from api.v1.views import app_views
 from flask import Flask, jsonify, abort, make_response, request
 from models import storage
-from models.state import State
-from models.city import City
 from models.place import Place
 from models.review import Review
 
@@ -52,7 +50,7 @@ def post_review(place_id):
     if not derulo:
         abort(400, "Not a JSON")
     if "user_id" not in derulo:
-        abort(400, "Missing name")
+        abort(400, "Missing user_id")
     if "text" not in derulo:
         abort(400, "Missing text")
     place_link = storage.get("Place", place_id)
